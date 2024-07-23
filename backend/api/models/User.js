@@ -1,19 +1,32 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema({
+const cardSchema = new mongoose.Schema({
   uid: {
     type: String,
     required: true,
     unique: true,
   },
-  points: {
-    type: Number,
-    default: 0,
+  lastScanned: {
+    type: Date,
+    default: null,
+  },
+});
+
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
   },
   password: {
     type: String,
     required: true,
   },
+  points: {
+    type: Number,
+    default: 0,
+  },
+  cards: [cardSchema],
 });
 
 const User = mongoose.model('User', userSchema);
